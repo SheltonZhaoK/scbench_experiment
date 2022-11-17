@@ -68,7 +68,7 @@ def prepare_data(dir_path):
    labels = to_categorical(labels['encoding'], num_classes=len(pd.unique(labels['encoding'])), dtype='float32')
    return(data, labels, numlabels)
 
-dir_path = "/deac/csc/khuriGrp/khurin/nathan/data/"
+dir_path = "../data/"
 results = pd.DataFrame(columns=['FFNN_AVE', 'FFNN_STD'])
 nlayers = int(sys.argv[1]) #input
 nnodes = int(sys.argv[2]) #input
@@ -87,5 +87,5 @@ for train, test in kfold.split(data, np.argmax(labels, axis= -1)):
 	 
 results = results.append({'FFNN_AVE': np.mean(kappa_scores_ffnn),'FFNN_STD': np.std(kappa_scores_ffnn)},ignore_index=True)
   
-output_filename = "/deac/csc/khuriGrp/zhaok220/output/ffnn_prediction/results_ffnn_raw_" + str(nlayers) + "_" + str(nnodes) + ".csv"
+output_filename = "../output/ffnn_prediction/results_ffnn_raw_" + str(nlayers) + "_" + str(nnodes) + ".csv"
 results.to_csv(output_filename, index=False)
